@@ -70,7 +70,7 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100) {
     if (any(!is.finite(M))) {
       stop("M contains non-finite values.", call. = FALSE)
     }
-  }
+  } ## perfect checking
   
   # ---- Call C++ core ----
   # Here MyKmeans_c should implement the main K-means iterations only.

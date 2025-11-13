@@ -49,7 +49,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
         if (counts[k] == 0u) {
           Rcpp::stop("Empty cluster detected at iteration " +
             std::to_string(iter + 1) +
-            ". Please try a different initialization M.");
+            ". Please try a different initialization M."); //good checking
         }
       }
       
