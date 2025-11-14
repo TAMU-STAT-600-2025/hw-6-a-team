@@ -2,25 +2,36 @@
 % Please edit documentation in R/Kmeans_wrapper.R
 \name{MyKmeans}
 \alias{MyKmeans}
-\title{Title}
+\title{K-means clustering}
 \usage{
 MyKmeans(X, K, M = NULL, numIter = 100)
 }
 \arguments{
-\item{X}{}
+\item{X}{Numeric matrix or data.frame of size \eqn{n \times p},
+where each row is an observation.}
 
-\item{K}{}
+\item{K}{Integer, number of clusters. Must be between 1 and \code{nrow(X)}.}
 
-\item{M}{}
+\item{M}{Optional numeric matrix of initial cluster centers of size
+\eqn{K \times p}. If \code{NULL} (default), \code{K} distinct rows
+of \code{X} are chosen at random.}
 
-\item{numIter}{}
+\item{numIter}{Integer, maximum number of iterations (default 100).}
 }
 \value{
-Explain return
+An integer vector of length \eqn{n} with cluster assignments taking
+values in \code{1, ..., K}.
 }
 \description{
-Title
+K-means clustering with input checking and initialization in R,
+and the main algorithm implemented in C++ via \code{MyKmeans_c()}.
 }
 \examples{
-# Give example
+set.seed(123)
+X <- rbind(
+  matrix(rnorm(50, mean = 0, sd = 0.3), ncol = 2),
+  matrix(rnorm(50, mean = 3, sd = 0.3), ncol = 2)
+)
+cl <- MyKmeans(X, K = 2, numIter = 50)
+table(cl)
 }

@@ -1,13 +1,16 @@
 Package: GroupHW
 Type: Package
-Title: What the package does (short line)
+Title: K-Means and Multiclass Logistic Regression with Rcpp
 Version: 1.0
-Date: 2020-10-17
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2025-11-11
+Author: Fu, Ziang and Zhu, Zhiyuan
+Maintainer: Fu, Ziang <ziangfu@tamu.edu>
+Description: Provides R and C++ (via 'Rcpp' and 'RcppArmadillo') implementations of 
+    K-means clustering and multiclass logistic regression fitted by a damped Newton 
+    method with ridge regularization. Includes R wrappers with input validation and 
+    C++ cores for performance.
+License: GPL-3
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8

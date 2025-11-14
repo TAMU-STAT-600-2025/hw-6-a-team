@@ -2,26 +2,48 @@
 % Please edit documentation in R/LR_wrapper.R
 \name{LRMultiClass}
 \alias{LRMultiClass}
-\title{Title}
+\title{Multi-class Logistic Regression via Damped Newton's Method}
 \usage{
 LRMultiClass(X, y, beta_init = NULL, numIter = 50, eta = 0.1, lambda = 1)
 }
 \arguments{
-\item{X}{}
+\item{X}{Numeric matrix (n x p). The first column should be all 1s (intercept).}
 
-\item{y}{}
+\item{y}{Integer/numeric vector (length n) of class labels \code{0,1,...,K-1}.}
 
-\item{beta_init}{}
+\item{beta_init}{Optional numeric matrix (p x K) of initial coefficients.
+If \code{NULL}, initialized to zeros.}
 
-\item{numIter}{}
+\item{numIter}{Positive integer; number of Newton iterations (default 50).}
 
-\item{eta}{}
+\item{eta}{Positive numeric; damping/step size (default 0.1).}
 
-\item{lambda}{}
+\item{lambda}{Nonnegative numeric; ridge penalty (default 1).}
+}
+\value{
+A list with
+\item{beta}{Numeric matrix (p x K) of coefficients after \code{numIter} iterations.}
+\item{objective}{Numeric vector of length \code{numIter + 1}; objective values at
+  the start and after each iteration. Objective is
+  \eqn{-\sum_i \log p_{y_i}(x_i) + (\lambda/2) \|\beta\|_F^2}.}
 }
 \description{
-Title
+Fits a multi-class logistic regression model using damped Newton's method.
 }
 \examples{
 # Give example
+set.seed(1)
+n <- 200; p <- 6; K <- 3
+X <- cbind(1, matrix(rnorm(n*(p-1)), n, p-1))  # intercept in col 1
+beta_true <- matrix(runif(p*K, -0.5, 0.5), p, K)
+# Generate probabilities and y
+lin <- X \%*\% beta_true
+lin <- lin - apply(lin, 1, max)               # stabilize
+P <- exp(lin); P <- P / rowSums(P)
+y <- apply(P, 1, function(prob) sample(0:(K-1), 1, prob = prob))
+
+fit <- LRMultiClass(X, y, numIter = 30, eta = 0.2, lambda = 0.5)
+str(fit)
+
+
 }
