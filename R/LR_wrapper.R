@@ -1,4 +1,7 @@
-#' Title
+#' Multi-class Logistic Regression via Damped Newton's Method
+#'
+#' @description
+#' Fits a multi-class logistic regression model using damped Newton's method.
 #'
 #' @param X Numeric matrix (n x p). The first column should be all 1s (intercept).
 #' @param y Integer/numeric vector (length n) of class labels \code{0,1,...,K-1}.
